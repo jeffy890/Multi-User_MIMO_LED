@@ -31,34 +31,19 @@ H = [1 0 0 0;
 % inverce of H
 iH = inv(H);
 
-% the degree of interference
-DI = zeros(1,4);
-DI(1) = ( H(1,2) + H(1,3) + H(1, 4) ) / H(1,1);
-DI(2) = ( H(2,1) + H(2,3) + H(2, 4) ) / H(2,2);
-DI(3) = ( H(3,1) + H(3,2) + H(3, 4) ) / H(3,3);
-DI(4) = ( H(4,1) + H(4,2) + H(4, 3) ) / H(4,4);
-
-% make the base signal
-data1 = preprocessing(bit);
-% copy and shift data1 to other channels
-data2 = circshift(data1, 10);
-data3 = circshift(data1, 20);
-data4 = circshift(data1, 30);
-
 % wd signal processing
 %  preparation of send matrix
-mimo1 = zeros(1, bitlength*5/4);
-mimo2 = zeros(1, bitlength*5/4);
-mimo3 = zeros(1, bitlength*5/4);
-mimo4 = zeros(1, bitlength*5/4);
-%  MIMO processing (wX)
-for i = 1:(2^8)*5/4
-    mimo1(i) = iH(1,1) * data1(i) + iH(1,2) * data2(i) + iH(1,3) * data3(i) + iH(1,4) * data4(i);
-    mimo2(i) = iH(2,1) * data1(i) + iH(2,2) * data2(i) + iH(2,3) * data3(i) + iH(2,4) * data4(i);
-    mimo3(i) = iH(3,1) * data1(i) + iH(3,2) * data2(i) + iH(3,3) * data3(i) + iH(3,4) * data4(i);
-    mimo4(i) = iH(4,1) * data1(i) + iH(4,2) * data2(i) + iH(4,3) * data3(i) + iH(4,4) * data4(i);
+mimo1 = zeros(1, 16);
+mimo2 = zeros(1, 16);
+mimo3 = zeros(1, 16);
+mimo4 = zeros(1, 16);
+%  MIMO processing for signal S (wS)
+for i = 1:(16)  
+    mimo1(i) = iH(1,1) * S(1,i) + iH(1,2) * S(2,i) + iH(1,3) * S(3,i) + iH(1,4) * S(4,i);
+    mimo2(i) = iH(2,1) * S(1,i) + iH(2,2) * S(2,i) + iH(2,3) * S(3,i) + iH(2,4) * S(4,i);
+    mimo3(i) = iH(3,1) * S(1,i) + iH(3,2) * S(2,i) + iH(3,3) * S(3,i) + iH(3,4) * S(4,i);
+    mimo4(i) = iH(4,1) * S(1,i) + iH(4,2) * S(2,i) + iH(4,3) * S(3,i) + iH(4,4) * S(4,i);
 end
-
 % bias max min
 bmax1 = max(mimo1);
 bmin1 = min(mimo1);
@@ -103,7 +88,7 @@ title('signal4');
 
 % The transmitted signal wd must be given a different name to distinguish it from S.
 txS = [signal1 ; signal2 ; signal3 ; signal4];
-save('transmitted_signal.mat', 'txS_wd');
+save('transmitted_signal.mat', 'txS_wS');
 
 signal1 = lowpass(signal1);
 signal2 = lowpass(signal2);
