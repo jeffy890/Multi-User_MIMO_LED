@@ -31,13 +31,13 @@ H = [1 0 0 0;
 % inverce of H
 iH = inv(H);
 
-% wd signal processing
-%  preparation of send matrix
+% wS signal processing
+% preparation of send matrix
 mimo1 = zeros(1, 16);
 mimo2 = zeros(1, 16);
 mimo3 = zeros(1, 16);
 mimo4 = zeros(1, 16);
-%  MIMO processing for signal S (wS)
+% MIMO processing for signal S (wS)
 for i = 1:(16)  
     mimo1(i) = iH(1,1) * S(1,i) + iH(1,2) * S(2,i) + iH(1,3) * S(3,i) + iH(1,4) * S(4,i);
     mimo2(i) = iH(2,1) * S(1,i) + iH(2,2) * S(2,i) + iH(2,3) * S(3,i) + iH(2,4) * S(4,i);
@@ -68,7 +68,7 @@ signal1 = ((repelem(mimo1, repnumber)*(2^resolution))-(2^(resolution-1)))/att;
 signal2 = ((repelem(mimo2, repnumber)*(2^resolution))-(2^(resolution-1)))/att;
 signal3 = ((repelem(mimo3, repnumber)*(2^resolution))-(2^(resolution-1)))/att;
 signal4 = ((repelem(mimo4, repnumber)*(2^resolution))-(2^(resolution-1)))/att;
-% end of signal processing wd
+% end of signal processing wS
 
 subplot(4,1,1);
 plot(signal1);
@@ -86,7 +86,7 @@ subplot(4,1,4);
 plot(signal4);
 title('signal4');
 
-% The transmitted signal wd must be given a different name to distinguish it from S.
+% The transmitted signal wS must be given a different name to distinguish it from S.
 txS = [signal1 ; signal2 ; signal3 ; signal4];
 save('transmitted_signal.mat', 'txS_wS');
 
