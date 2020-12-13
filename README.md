@@ -13,5 +13,5 @@ some wavedata that was captured in the experiments
 - LED transmitters & PD receivers
 
 ### How to execute code and get data
-The code "transmit_S.m" should be executed first. It transmits S for calculating H.
+The code "transmit_S.m" should be executed first. It transmits S for calculating H.<br>
 After calculating H, use the H into "transmit_wd.m" and transmit wd.
