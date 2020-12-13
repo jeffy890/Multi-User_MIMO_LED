@@ -14,4 +14,7 @@ some wavedata that was captured in the experiments
 
 ### How to execute code and get data
 The code "transmit_S.m" should be executed first. It transmits S for calculating H.<br>
-After calculating H, use the H into "transmit_wd.m" and transmit wd.
+After calculating H, use the H into "transmit_wd.m" and transmit wd.<br>
+<br>
+The "transmit_wS.m" transmits wS that is processed by iH. This signal can be used for calculating the next H.<br>
+<br>
