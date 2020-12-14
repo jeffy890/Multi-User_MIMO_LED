@@ -11,8 +11,8 @@ disp(['Found Device: ', char(ads7.FriendlyName)]);
 jesd204 = ads7.JESD204;
 frameNum = 0+1;      % first frame index (.net uses 0 based arrays)
 
-ad9144setup(ads7, mode);
 mode = 0;
+ad9144setup(ads7, mode);
 
 % constant
 resolution = 16;

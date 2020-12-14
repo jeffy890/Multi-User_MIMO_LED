@@ -87,7 +87,7 @@ plot(signal4);
 title('signal4');
 
 % The transmitted signal wS must be given a different name to distinguish it from S.
-txS = [signal1 ; signal2 ; signal3 ; signal4];
+txS_wS = [signal1 ; signal2 ; signal3 ; signal4];
 save('transmitted_signal.mat', 'txS_wS');
 
 signal1 = lowpass(signal1);
